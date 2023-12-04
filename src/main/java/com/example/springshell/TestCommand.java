@@ -1,5 +1,7 @@
 package com.example.springshell;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.springframework.shell.command.annotation.Command;
 import org.springframework.shell.command.annotation.Option;
 
@@ -18,6 +20,8 @@ public class TestCommand {
 
     @Command(command = "hi3", description = "This command will print 'Hello, World!'")
     void hello3(
+            @NotBlank
+            @Size(min = 3, max = 7)
             @Option(shortNames = 'n', longNames = "name", description = "input name") String name
             ) {
         System.out.printf("Hello, World! (3) %s%n", name);
