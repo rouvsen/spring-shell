@@ -1,6 +1,7 @@
 package com.example.springshell;
 
 import org.springframework.shell.command.annotation.Command;
+import org.springframework.shell.command.annotation.Option;
 
 @Command(group = "Test Commands")
 public class TestCommand {
@@ -14,6 +15,12 @@ public class TestCommand {
     String hello2() { //also you can return String
         return "Hello, World! - 2";
     }
+
+    @Command(command = "hi3", description = "This command will print 'Hello, World!'")
+    void hello3(
+            @Option(shortNames = 'n', longNames = "name", description = "input name") String name
+            ) {
+        System.out.printf("Hello, World! (3) %s%n", name);
+    }
 }
 
-// >> 7.50 minute <<
