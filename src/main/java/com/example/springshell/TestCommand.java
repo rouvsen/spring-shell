@@ -26,5 +26,17 @@ public class TestCommand {
             ) {
         System.out.printf("Hello, World! (3) %s%n", name);
     }
+
+    @Command(command = "hi4", description = "This command will print 'Hello, World!'")
+    void hello4(
+            @NotBlank
+            @Size(min = 3, max = 7)
+            @Option(shortNames = 'n', longNames = "name", description = "input name") String name,
+            @NotBlank
+            @Size(min = 3, max = 7)
+            @Option(shortNames = 'n', longNames = "name", description = "input name") String surname
+    ) {
+        System.out.printf("Hello, World! (3) %s %s %n", name, surname);
+    }
 }
 
