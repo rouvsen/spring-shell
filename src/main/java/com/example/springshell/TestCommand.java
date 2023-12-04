@@ -2,6 +2,8 @@ package com.example.springshell;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.fusesource.jansi.Ansi;
+import org.fusesource.jansi.AnsiConsole;
 import org.springframework.shell.command.annotation.Command;
 import org.springframework.shell.command.annotation.Option;
 
@@ -38,7 +40,27 @@ public class TestCommand {
     ) {
         System.out.printf("Hello, World! (3) %s %s %n", name, surname);
     }
+
+    @Command(command = "hi5", description = "This command will print 'Hello, World!' and entered values")
+    void hello5(
+            @NotBlank
+            @Size(min = 3, max = 7)
+            @Option(shortNames = 'n', longNames = "name", description = "input name") String name,
+            @NotBlank
+            @Size(min = 3, max = 7)
+            @Option(shortNames = 's', longNames = "surname", description = "input surname") String surname
+    ) {
+        AnsiConsole.systemInstall();
+        System.out.print
+                (
+                    Ansi.ansi()
+                            .fg(Ansi.Color.RED)
+                            .bg(Ansi.Color.WHITE)
+                            .a("Hello, World! (3) %s %s %n".formatted(name, surname))
+                            .reset()
+                );
+        AnsiConsole.systemUninstall();
+    }
 }
 
-//22;25
 
