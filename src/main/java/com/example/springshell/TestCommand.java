@@ -34,9 +34,11 @@ public class TestCommand {
             @Option(shortNames = 'n', longNames = "name", description = "input name") String name,
             @NotBlank
             @Size(min = 3, max = 7)
-            @Option(shortNames = 'n', longNames = "name", description = "input name") String surname
+            @Option(shortNames = 's', longNames = "surname", description = "input surname") String surname
     ) {
         System.out.printf("Hello, World! (3) %s %s %n", name, surname);
     }
 }
+
+//22;25
 
