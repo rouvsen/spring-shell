@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 public class CLIExceptionHandler implements CommandExceptionResolver {
 
-
     @Override
     public CommandHandlingResult resolve(Exception ex) {
         if (ex instanceof ParameterValidationException)
@@ -25,4 +24,3 @@ public class CLIExceptionHandler implements CommandExceptionResolver {
     }
 }
 
-//17 57

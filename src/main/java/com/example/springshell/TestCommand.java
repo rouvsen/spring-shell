@@ -2,13 +2,17 @@ package com.example.springshell;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.RequiredArgsConstructor;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 import org.springframework.shell.command.annotation.Command;
 import org.springframework.shell.command.annotation.Option;
 
+@RequiredArgsConstructor
 @Command(group = "Test Commands")
 public class TestCommand {
+
+    private final ShellPrinter printer;
 
     @Command(command = "hi", description = "This command will print 'Hello, World!'")
     void hello() { //this is the best choice (with void, and println)
@@ -61,6 +65,21 @@ public class TestCommand {
                 );
         AnsiConsole.systemUninstall();
     }
+
+    @Command(command = "hi6", description = "This command will print 'Hello, World!' and entered values")
+    void hello6(
+            @NotBlank
+            @Size(min = 3, max = 7)
+            @Option(shortNames = 'n', longNames = "name", description = "input name") String name,
+            @NotBlank
+            @Size(min = 3, max = 7)
+            @Option(shortNames = 's', longNames = "surname", description = "input surname") String surname
+    ) {
+        printer.printSuccess("%s %s".formatted(name, surname));
+        printer.printError("Error message !");
+    }
+
+    //Write to 4340
 }
 
 
