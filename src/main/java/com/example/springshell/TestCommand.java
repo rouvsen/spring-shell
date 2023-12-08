@@ -13,6 +13,7 @@ import org.springframework.shell.command.annotation.Option;
 public class TestCommand {
 
     private final ShellPrinter printer;
+    private final ShellReader reader;
 
     @Command(command = "hi", description = "This command will print 'Hello, World!'")
     void hello() { //this is the best choice (with void, and println)
@@ -29,7 +30,7 @@ public class TestCommand {
             @NotBlank
             @Size(min = 3, max = 7)
             @Option(shortNames = 'n', longNames = "name", description = "input name") String name
-            ) {
+    ) {
         System.out.printf("Hello, World! (3) %s%n", name);
     }
 
@@ -57,11 +58,11 @@ public class TestCommand {
         AnsiConsole.systemInstall();
         System.out.print
                 (
-                    Ansi.ansi()
-                            .fg(Ansi.Color.RED)
-                            .bg(Ansi.Color.WHITE)
-                            .a("Hello, World! (3) %s %s %n".formatted(name, surname))
-                            .reset()
+                        Ansi.ansi()
+                                .fg(Ansi.Color.RED)
+                                .bg(Ansi.Color.WHITE)
+                                .a("Hello, World! (3) %s %s %n".formatted(name, surname))
+                                .reset()
                 );
         AnsiConsole.systemUninstall();
     }
@@ -79,7 +80,14 @@ public class TestCommand {
         printer.printError("Error message !");
     }
 
-    //Write to 4340
+    @Command(command = "inputs", description = "This command will get inputs from console")
+    void inputs() {
+        String name = reader.readLine("Your name");
+        String surname = reader.readLine("Your surname");
+        String password = reader.readLinePassword("Your password");
+        printer.print(name + " " + surname + " " + password);
+    }
+
 }
 
 
