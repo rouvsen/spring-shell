@@ -3,6 +3,7 @@ package com.example.springshell;
 import lombok.RequiredArgsConstructor;
 import org.fusesource.jansi.Ansi;
 import org.springframework.shell.command.annotation.Command;
+import org.springframework.shell.command.annotation.CommandAvailability;
 import org.springframework.shell.command.annotation.Option;
 
 import java.util.Arrays;
@@ -31,6 +32,7 @@ public class PharmacyCommand {
                 .forEach(item -> shellPrinter.print(item.title()));
     }
 
+    @CommandAvailability(provider = {"userLoggedInProvider"})
     @Command(command = "pharmacyTable")
     void pharmacyFormatted(
 //            @Option(required = true, shortNames = 'c', longNames = "city", description = "city name") String city,

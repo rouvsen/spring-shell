@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 import org.springframework.shell.command.annotation.Command;
+import org.springframework.shell.command.annotation.CommandAvailability;
 import org.springframework.shell.command.annotation.Option;
 
 @RequiredArgsConstructor
@@ -80,6 +81,7 @@ public class TestCommand {
         printer.printError("Error message !");
     }
 
+    @CommandAvailability(provider = {"userLoggedInProvider"})
     @Command(command = "inputs", description = "This command will get inputs from console")
     void inputs() {
         String name = reader.readLine("Your name");
